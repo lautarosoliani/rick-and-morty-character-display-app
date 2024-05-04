@@ -6,7 +6,7 @@ const fetchCharacters = async () => {
       throw new Error('Network response was not ok')
    }
    const json = await response.json()
-   return JSON.parse(JSON.stringify(json.results))
+   return json.results
 }
 
 export function useCharacters() {

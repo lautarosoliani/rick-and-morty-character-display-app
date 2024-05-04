@@ -1,9 +1,9 @@
-import CharactersList from '../../components/CharactersList'
+import MainLayout from '../components/CardsLayout'
 
 export default function Home() {
    return (
       <main>
-         <CharactersList />
+         <MainLayout />
       </main>
    )
 }
