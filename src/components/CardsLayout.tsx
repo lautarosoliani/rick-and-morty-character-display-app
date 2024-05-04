@@ -1,11 +1,12 @@
 import { useCharacters } from '../../hooks/useCharacters'
 import CardCharacter from './CardCharacter'
 
-interface Character {
+export type Character = {
    id: number
    name: string
    status: string
    species: string
+   image: string
 }
 
 function CardsLayout() {

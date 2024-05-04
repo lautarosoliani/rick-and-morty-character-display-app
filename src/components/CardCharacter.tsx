@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import { Character } from './CardsLayout'
 
-export default function CardCharacter(props: any) {
+export default function CardCharacter(props: Character) {
    const { name, status, species, image } = props
    return (
       <div className='max-w-[18rem] rounded-lg bg-gray-900 text-gray-50 shadow-xl m-4 shrink-0'>
