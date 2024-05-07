@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useCharacters } from '../../hooks/useCharacters'
 import CardCharacter from './CardCharacter'
-import Image from 'next/image'
-import { twMerge } from 'tailwind-merge'
 import { useEpisodes } from '../../hooks/useEpisodes'
+import CharacterSelect from './CharacterSelect'
+import EpisodeList from './EpisodeList'
 
 export type Character = {
    id: number
@@ -49,149 +49,37 @@ function CardsLayout() {
             ))}
          </div>
          <div className='flex p-10 m-8 space-x-10'>
-            <div className='flex flex-col w-full space-y-5'>
-               <h1 className='text-2xl font-bold text-gray-50 text-center mb-2'>Select Character #1</h1>
-               <div className='flex flex-col w-full space-y-5'>
-                  <div className='flex rounded-lg w-full h-96 items-center justify-center'>
-                     <Image
-                        src={
-                           selectedCharacter1
-                              ? selectedCharacter1.image
-                              : 'https://rickandmortyapi.com/api/character/avatar/19.jpeg'
-                        }
-                        alt={selectedCharacter1 ? selectedCharacter1.name : 'Default Name'}
-                        width={400}
-                        height={400}
-                        priority
-                        className='rounded-full'
-                     />
-                  </div>
-                  <select
-                     className='border-2 border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500 w-full bg-blue-950 text-white'
-                     onChange={(e) => handleCharacterChange(e, 1)}
-                     value={selectedCharacter1 ? selectedCharacter1.id.toString() : ''}
-                  >
-                     <option value='' disabled>
-                        Select Character #1
-                     </option>{' '}
-                     {data.map((character: Character) => (
-                        <option key={character.id} value={character.id}>
-                           {character.name}
-                        </option>
-                     ))}
-                  </select>
-                  <button className='text-white' onClick={() => setSelectedCharacter1(null)}>
-                     Remove Selection
-                  </button>
-               </div>
-            </div>
-            <div className='flex flex-col w-full space-y-5'>
-               <h1 className='text-2xl font-bold text-gray-50 text-center mb-2'>Select Character #2</h1>
-               <div className='flex flex-col w-full space-y-5'>
-                  <div className='flex rounded-lg w-full h-96 items-center justify-center'>
-                     <Image
-                        src={
-                           selectedCharacter2
-                              ? selectedCharacter2.image
-                              : 'https://rickandmortyapi.com/api/character/avatar/19.jpeg'
-                        }
-                        alt={selectedCharacter2 ? selectedCharacter2.name : 'Default Name'}
-                        width={400}
-                        height={400}
-                        priority
-                        className='rounded-full'
-                     />
-                  </div>
-                  <select
-                     className='border-2 border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500 bg-blue-950 text-white'
-                     onChange={(e) => handleCharacterChange(e, 2)}
-                     value={selectedCharacter2 ? selectedCharacter2.id.toString() : ''}
-                  >
-                     <option value='' disabled>
-                        Select Character #2
-                     </option>{' '}
-                     {data.map((character: Character) => (
-                        <option key={character.id} value={character.id}>
-                           {character.name}
-                        </option>
-                     ))}
-                  </select>
-                  <button className='text-white' onClick={() => setSelectedCharacter2(null)}>
-                     Remove Selection
-                  </button>
-               </div>
-            </div>
+            <CharacterSelect
+               data={data}
+               character={selectedCharacter1}
+               onChange={(e) => handleCharacterChange(e, 1)}
+               onRemove={() => setSelectedCharacter1(null)}
+               characterNumber={1}
+            />
+            <CharacterSelect
+               data={data}
+               character={selectedCharacter2}
+               onChange={(e) => handleCharacterChange(e, 2)}
+               onRemove={() => setSelectedCharacter2(null)}
+               characterNumber={2}
+            />
          </div>
          <div className='grid grid-cols-3 p-10 m-8 text-white'>
-            <div>
-               <div
-                  className={twMerge(
-                     'text-2xl font-bold text-gray-50 mb-2',
-                     selectedCharacter1 === null && 'invisible'
-                  )}
-               >
-                  Character #1 - Only Episodes
-               </div>
-               <ul>
-                  {episodesFirstCharacter.map((query, index) =>
-                     query.isLoading ? (
-                        <li key={index}>Loading...</li>
-                     ) : query.error ? (
-                        <li key={index}>Error: {query.error.message}</li>
-                     ) : (
-                        <li key={index}>{query.data.name}</li>
-                     )
-                  )}
-               </ul>
-            </div>
-            <div>
-               <div
-                  className={twMerge(
-                     'text-2xl font-bold text-gray-50 mb-2',
-                     (!selectedCharacter1 || !selectedCharacter2) && 'invisible'
-                  )}
-               >
-                  Characters #1 & #2 - Shared Episodes
-               </div>
-               <ul>
-                  {sharedEpisodes.some((query) => query.isLoading) ? (
-                     <li>Loading...</li>
-                  ) : sharedEpisodes.some((query) => query.error) ? (
-                     sharedEpisodes
-                        .filter((query) => query.error)
-                        .map((query, index) => <li key={index}>Error: {query.error?.message}</li>)
-                  ) : sharedEpisodes.filter((query) => query.data && query.data.name).length > 0 ? (
-                     sharedEpisodes
-                        .filter((query) => query.data.name)
-                        .map((query, index) => <li key={index}>{query.data.name}</li>)
-                  ) : (
-                     <li className={twMerge((!selectedCharacter1 || !selectedCharacter2) && 'invisible')}>
-                        No shared episodes
-                     </li>
-                  )}
-               </ul>
-            </div>
-            <div>
-               <div
-                  className={twMerge(
-                     'text-2xl font-bold text-gray-50 mb-2',
-                     selectedCharacter2 === null && 'invisible'
-                  )}
-               >
-                  Character #2 - Only Episodes
-               </div>
-               <ul>
-                  {episodesSecondCharacter.map((query, index) =>
-                     query.isLoading ? (
-                        <li key={index}>Loading...</li>
-                     ) : query.error ? (
-                        <li key={index}>Error: {query.error.message}</li>
-                     ) : (
-                        <li key={index}>{query.data.name}</li>
-                     )
-                  )}
-               </ul>
-            </div>
+            <EpisodeList
+               episodes={episodesFirstCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+               title='Character #1 - Only Episodes'
+               isVisible={selectedCharacter1 !== null}
+            />
+            <EpisodeList
+               episodes={sharedEpisodes as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+               title='Characters #1 & #2 - Shared Episodes'
+               isVisible={selectedCharacter1 !== null && selectedCharacter2 !== null}
+               />
+            <EpisodeList               
+               episodes={episodesSecondCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+               title='Character #2 - Only Episodes'
+               isVisible={selectedCharacter2 !== null}
+            />
          </div>
       </>
    )
