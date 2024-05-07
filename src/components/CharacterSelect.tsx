@@ -1,4 +1,4 @@
-import { Character } from './CardsLayout'
+import { Character } from './CharactersDashboard'
 import Image from 'next/image'
 
 type CharacterSelectProps = {

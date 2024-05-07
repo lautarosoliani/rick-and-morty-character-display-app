@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useCharacters } from '../../hooks/useCharacters'
-import CardCharacter from './CardCharacter'
+import CardCharacter from './CharacterCard'
 import { useEpisodes } from '../../hooks/useEpisodes'
 import CharacterSelect from './CharacterSelect'
 import EpisodeList from './EpisodeList'
@@ -14,7 +14,7 @@ export type Character = {
    episode: string[]
 }
 
-function CardsLayout() {
+function CharactersDashboard() {
    const { data, error, isLoading } = useCharacters()
    const [selectedCharacter1, setSelectedCharacter1] = useState<Character | null>(null)
    const [selectedCharacter2, setSelectedCharacter2] = useState<Character | null>(null)
@@ -66,7 +66,9 @@ function CardsLayout() {
          </div>
          <div className='grid grid-cols-3 p-10 m-8 text-white'>
             <EpisodeList
-               episodes={episodesFirstCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+               episodes={
+                  episodesFirstCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]
+               }
                title='Character #1 - Only Episodes'
                isVisible={selectedCharacter1 !== null}
             />
@@ -74,9 +76,15 @@ function CardsLayout() {
                episodes={sharedEpisodes as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
                title='Characters #1 & #2 - Shared Episodes'
                isVisible={selectedCharacter1 !== null && selectedCharacter2 !== null}
-               />
-            <EpisodeList               
-               episodes={episodesSecondCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+            />
+            <EpisodeList
+               episodes={
+                  episodesSecondCharacter as {
+                     data: { name: string } | null
+                     error: Error | null
+                     isLoading: boolean
+                  }[]
+               }
                title='Character #2 - Only Episodes'
                isVisible={selectedCharacter2 !== null}
             />
@@ -85,4 +93,4 @@ function CardsLayout() {
    )
 }
 
-export default CardsLayout
+export default CharactersDashboard

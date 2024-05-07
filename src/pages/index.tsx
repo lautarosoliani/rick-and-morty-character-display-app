@@ -1,4 +1,4 @@
-import MainLayout from '../components/CardsLayout'
+import MainLayout from '../components/CharactersDashboard'
 
 export default function Home() {
    return (

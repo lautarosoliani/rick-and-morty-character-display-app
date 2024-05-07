@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Character } from './CardsLayout'
+import { Character } from './CharactersDashboard'
 
 export default function CardCharacter(props: Character) {
    const { name, status, species, image } = props
