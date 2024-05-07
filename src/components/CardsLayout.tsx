@@ -154,18 +154,23 @@ function CardsLayout() {
                   Characters #1 & #2 - Shared Episodes
                </div>
                <ul>
-                  {sharedEpisodes.map((query, index) =>
-                     query.isLoading ? (
-                        <li key={index}>Loading...</li>
-                     ) : query.error ? (
-                        <li key={index}>Error: {query.error.message}</li>
-                     ) : (
-                        <li key={index}>{query.data.name}</li>
-                     )
+                  {sharedEpisodes.some((query) => query.isLoading) ? (
+                     <li>Loading...</li>
+                  ) : sharedEpisodes.some((query) => query.error) ? (
+                     sharedEpisodes
+                        .filter((query) => query.error)
+                        .map((query, index) => <li key={index}>Error: {query.error?.message}</li>)
+                  ) : sharedEpisodes.filter((query) => query.data && query.data.name).length > 0 ? (
+                     sharedEpisodes
+                        .filter((query) => query.data.name)
+                        .map((query, index) => <li key={index}>{query.data.name}</li>)
+                  ) : (
+                     <li className={twMerge((!selectedCharacter1 || !selectedCharacter2) && 'invisible')}>
+                        No shared episodes
+                     </li>
                   )}
                </ul>
             </div>
-
             <div>
                <div
                   className={twMerge(
