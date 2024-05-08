@@ -57,7 +57,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, data, setPage }) => {
             value={inputPage}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            className='text-center w-full bg-blue-950 text-white border-2 border-blue-900 font-bold rounded-xl hover:pointer'
+            className='text-center w-full bg-blue-950 text-white border-2 border-blue-900 font-bold rounded-xl hover:cursor-pointer focus:border-blue-800 focus:outline-none'
             style={{ width: '50px' }}
          />
       </div>
