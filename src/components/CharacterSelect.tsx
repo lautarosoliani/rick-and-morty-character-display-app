@@ -26,7 +26,7 @@ function CharacterSelect(props: CharacterSelectProps) {
                />
             </div>
             <select
-               className='border-2 border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500 w-full bg-blue-950 text-white'
+               className='border-2 border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500 w-full bg-blue-950 text-white hover:cursor-pointer'
                onChange={onChange}
                value={character ? character.id.toString() : ''}
             >
