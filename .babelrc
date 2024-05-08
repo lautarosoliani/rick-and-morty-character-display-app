@@ -1,0 +1,4 @@
+{
+   "presets": ["next/babel"], // This preset handles Next.js features
+   "plugins": []
+}
