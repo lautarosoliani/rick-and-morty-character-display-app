@@ -23,7 +23,7 @@ function EpisodeList(props: EpisodeListProps) {
                   .filter((query) => query.data?.name)
                   .map((query, index) => <li key={index}>{query.data?.name}</li>)
             ) : (
-               <li className={twMerge(!isVisible && 'invisible')}>No episodes found</li>
+               <li className={twMerge(!isVisible && 'invisible')}>No episodes shared</li>
             )}
          </ul>
       </div>
