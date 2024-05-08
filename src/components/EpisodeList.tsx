@@ -1,7 +1,9 @@
 import { twMerge } from 'tailwind-merge'
 
+export type Episodes = { data: { name: string } | null; error: Error | null; isLoading: boolean }[]
+
 type EpisodeListProps = {
-   episodes: { data: { name: string } | null; error: Error | null; isLoading: boolean }[]
+   episodes: Episodes
    title: string
    isVisible: boolean
 }

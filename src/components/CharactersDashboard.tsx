@@ -3,7 +3,8 @@ import { useCharacters } from '../../hooks/useCharacters'
 import CardCharacter from './CharacterCard'
 import { useEpisodes } from '../../hooks/useEpisodes'
 import CharacterSelect from './CharacterSelect'
-import EpisodeList from './EpisodeList'
+import EpisodeList, { Episodes } from './EpisodeList'
+import Pagination from './Pagination'
 
 export type Character = {
    id: number
@@ -49,23 +50,7 @@ function CharactersDashboard() {
                <CardCharacter key={character.id} {...character} />
             ))}
          </div>
-         <div className='flex justify-center mt-4'>
-            <button
-               className='bg-blue-950 text-white border-2 border-blue-900 hover:bg-blue-800 font-bold py-2 px-4 rounded-l'
-               onClick={() => setPage((old) => Math.max(old - 1, 1))}
-               disabled={page === 1}
-            >
-               Previous
-            </button>
-            <div className='text-white font-bold py-2 px-4 '>{`Page ${page}`}</div>
-            <button
-               className='bg-blue-950 text-white border-2 border-blue-900 hover:bg-blue-800 font-bold py-2 px-4 rounded-r'
-               onClick={() => setPage((old) => (data.info.next ? old + 1 : old))}
-               disabled={!data.info.next}
-            >
-               Next
-            </button>
-         </div>
+         <Pagination page={page} data={data} setPage={setPage} />
          <div className='flex p-10 m-8 space-x-10'>
             <CharacterSelect
                data={data.results}
@@ -84,25 +69,17 @@ function CharactersDashboard() {
          </div>
          <div className='grid grid-cols-3 p-10 m-8 text-white'>
             <EpisodeList
-               episodes={
-                  episodesFirstCharacter as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]
-               }
+               episodes={episodesFirstCharacter as Episodes}
                title='Character #1 - Only Episodes'
                isVisible={selectedCharacter1 !== null}
             />
             <EpisodeList
-               episodes={sharedEpisodes as { data: { name: string } | null; error: Error | null; isLoading: boolean }[]}
+               episodes={sharedEpisodes as Episodes}
                title='Characters #1 & #2 - Shared Episodes'
                isVisible={selectedCharacter1 !== null && selectedCharacter2 !== null}
             />
             <EpisodeList
-               episodes={
-                  episodesSecondCharacter as {
-                     data: { name: string } | null
-                     error: Error | null
-                     isLoading: boolean
-                  }[]
-               }
+               episodes={episodesSecondCharacter as Episodes}
                title='Character #2 - Only Episodes'
                isVisible={selectedCharacter2 !== null}
             />
