@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
 const fetchCharacters = async (page: number) => {
    const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
@@ -13,5 +13,6 @@ export function useCharacters(page = 1) {
    return useQuery({
       queryKey: ['characters', page],
       queryFn: () => fetchCharacters(page),
+      placeholderData: keepPreviousData,
    })
 }
