@@ -65,22 +65,24 @@ function CharactersDashboard() {
                characterNumber={2}
             />
          </div>
-         <div className='grid grid-cols-3 p-10 m-8 text-white'>
-            <EpisodeList
-               episodes={episodesFirstCharacter as Episodes}
-               title='Character #1 - Only Episodes'
-               isVisible={selectedCharacter1 !== null}
-            />
-            <EpisodeList
-               episodes={sharedEpisodes as Episodes}
-               title='Characters #1 & #2 - Shared Episodes'
-               isVisible={selectedCharacter1 !== null && selectedCharacter2 !== null}
-            />
-            <EpisodeList
-               episodes={episodesSecondCharacter as Episodes}
-               title='Character #2 - Only Episodes'
-               isVisible={selectedCharacter2 !== null}
-            />
+         <div className='flex text-center'>
+            <div className='grid grid-cols-3 p-10 m-8 text-white w-full'>
+               <EpisodeList
+                  episodes={episodesFirstCharacter as Episodes}
+                  title='Character #1 - Only Episodes'
+                  isVisible={selectedCharacter1 !== null}
+               />
+               <EpisodeList
+                  episodes={sharedEpisodes as Episodes}
+                  title='Characters #1 & #2 - Shared Episodes'
+                  isVisible={selectedCharacter1 !== null && selectedCharacter2 !== null}
+               />
+               <EpisodeList
+                  episodes={episodesSecondCharacter as Episodes}
+                  title='Character #2 - Only Episodes'
+                  isVisible={selectedCharacter2 !== null}
+               />
+            </div>
          </div>
       </>
    )
