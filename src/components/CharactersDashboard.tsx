@@ -1,10 +1,10 @@
-import { JSX, useState } from 'react'
+import { useState } from 'react'
 import { useCharacters } from '../../hooks/useCharacters'
-import CardCharacter from './CharacterCard'
 import { useEpisodes } from '../../hooks/useEpisodes'
 import CharacterSelect from './CharacterSelect'
 import EpisodeList, { Episodes } from './EpisodeList'
 import Pagination from './Pagination'
+import CardCharacter from './CharacterCard'
 
 export type Character = {
    id: number
@@ -22,7 +22,6 @@ function CharactersDashboard() {
    const [selectedCharacter2, setSelectedCharacter2] = useState<Character | null>(null)
    const episodesFirstCharacter = useEpisodes(selectedCharacter1 ? selectedCharacter1.episode : [])
    const episodesSecondCharacter = useEpisodes(selectedCharacter2 ? selectedCharacter2.episode : [])
-
    const sharedEpisodes = useEpisodes(
       selectedCharacter1 && selectedCharacter2
          ? selectedCharacter1.episode.filter((url) => selectedCharacter2.episode.includes(url))
@@ -31,15 +30,14 @@ function CharactersDashboard() {
 
    if (isLoading) return <div>Loading...</div>
    if (error) return <div>Error: {error.message}</div>
-   if (!data) return <div>No data available</div>
+   if (!data || !data.results) return <div>No data available</div>
 
-   const handleCharacterChange = (e: React.ChangeEvent<HTMLSelectElement>, characterNumber: number) => {
-      const characterId = parseInt(e.target.value, 10)
-      const character = data.results.find((char: Character) => char.id === characterId)
+   const handleCharacterChange = (characterId: string | null, characterNumber: number) => {
+      const character = data.results.find((char: Character) => char.id.toString() === characterId)
       if (characterNumber === 1) {
-         setSelectedCharacter1(character)
+         setSelectedCharacter1(character || null)
       } else {
-         setSelectedCharacter2(character)
+         setSelectedCharacter2(character || null)
       }
    }
 
@@ -55,14 +53,14 @@ function CharactersDashboard() {
             <CharacterSelect
                data={data.results}
                character={selectedCharacter1}
-               onChange={(e) => handleCharacterChange(e, 1)}
+               onChange={(id) => handleCharacterChange(id, 1)}
                onRemove={() => setSelectedCharacter1(null)}
                characterNumber={1}
             />
             <CharacterSelect
                data={data.results}
                character={selectedCharacter2}
-               onChange={(e) => handleCharacterChange(e, 2)}
+               onChange={(id) => handleCharacterChange(id, 2)}
                onRemove={() => setSelectedCharacter2(null)}
                characterNumber={2}
             />
