@@ -35,7 +35,6 @@ function CharacterSelect(props: CharacterSelectProps) {
       <div className='flex flex-col w-full space-y-5'>
          <h1 className='text-2xl font-bold text-gray-50 text-center mb-2'>Select Character #{characterNumber}</h1>
          <Select
-            className='basic-single hover:cursor-pointer'
             classNamePrefix='select'
             defaultValue={character ? { value: character.id.toString(), label: character.name } : undefined}
             isClearable={true}
@@ -55,6 +54,14 @@ function CharacterSelect(props: CharacterSelectProps) {
                   color: 'white',
                }),
                placeholder: (provided) => ({
+                  ...provided,
+                  color: 'white',
+               }),
+               input: (provided) => ({
+                  ...provided,
+                  color: 'white',
+               }),
+               dropdownIndicator: (provided) => ({
                   ...provided,
                   color: 'white',
                }),
