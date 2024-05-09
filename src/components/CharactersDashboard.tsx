@@ -4,7 +4,7 @@ import { useEpisodes } from '../../hooks/useEpisodes'
 import CharacterSelect from './CharacterSelect'
 import EpisodeList, { Episodes } from './EpisodeList'
 import Pagination from './Pagination'
-import CardCharacter from './CharacterCard'
+import CharacterCard, { CharacterCardSkeleton } from './CharacterCard'
 
 export type Character = {
    id: number
@@ -28,7 +28,21 @@ function CharactersDashboard() {
          : []
    )
 
-   if (isLoading) return <div>Loading...</div>
+   function renderSkeletons(count: number) {
+      return (
+         <>
+            <div className='flex flex-wrap justify-center mt-10'>
+               {Array.from({ length: count }, (_, index) => (
+                  <CharacterCardSkeleton key={index} />
+               ))}
+            </div>
+         </>
+      )
+   }
+
+   if (isLoading) {
+      return renderSkeletons(20)
+   }
    if (error) return <div>Error: {error.message}</div>
    if (!data || !data.results) return <div>No data available</div>
 
@@ -45,7 +59,7 @@ function CharactersDashboard() {
       <>
          <div className='flex flex-wrap justify-center mt-10'>
             {data.results.map((character: JSX.IntrinsicAttributes & Character) => (
-               <CardCharacter key={character.id} {...character} />
+               <CharacterCard key={character.id} {...character} />
             ))}
          </div>
          <Pagination page={page} data={data} setPage={setPage} />
