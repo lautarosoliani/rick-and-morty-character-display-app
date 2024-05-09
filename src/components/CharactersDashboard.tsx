@@ -31,7 +31,8 @@ function CharactersDashboard() {
    function renderSkeletons(count: number) {
       return (
          <>
-            <div className='flex flex-wrap justify-center mt-10'>
+            <div className='flex w-full justify-center mt-10 text-white'>Loading...</div>
+            <div className='flex flex-wrap justify-center mt-10 text-white'>
                {Array.from({ length: count }, (_, index) => (
                   <CharacterCardSkeleton key={index} />
                ))}
