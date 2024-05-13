@@ -10,6 +10,7 @@ type EpisodeListProps = {
 
 function EpisodeList(props: EpisodeListProps) {
    const { episodes, title, isVisible } = props
+
    return (
       <div>
          <div className={twMerge('text-2xl font-bold text-gray-50 mb-2', !isVisible && 'invisible')}>{title}</div>
@@ -25,7 +26,7 @@ function EpisodeList(props: EpisodeListProps) {
                   .filter((query) => query.data?.name)
                   .map((query, index) => <li key={index}>{query.data?.name}</li>)
             ) : (
-               <li className={twMerge(!isVisible && 'invisible')}>No episodes shared</li>
+               <li className={twMerge('text-gray-50', !isVisible && 'invisible')}>None Only Episodes</li>
             )}
          </ul>
       </div>

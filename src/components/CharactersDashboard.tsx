@@ -20,11 +20,25 @@ function CharactersDashboard() {
    const { data, error, isLoading } = useCharacters(page)
    const [selectedCharacter1, setSelectedCharacter1] = useState<Character | null>(null)
    const [selectedCharacter2, setSelectedCharacter2] = useState<Character | null>(null)
-   const episodesFirstCharacter = useEpisodes(selectedCharacter1 ? selectedCharacter1.episode : [])
-   const episodesSecondCharacter = useEpisodes(selectedCharacter2 ? selectedCharacter2.episode : [])
+   const episodesFirstCharacter = useEpisodes(
+      selectedCharacter1 && selectedCharacter2
+         ? selectedCharacter1.episode.filter((ep) => !selectedCharacter2.episode.includes(ep))
+         : selectedCharacter1
+         ? selectedCharacter1.episode
+         : []
+   )
+
+   const episodesSecondCharacter = useEpisodes(
+      selectedCharacter1 && selectedCharacter2
+         ? selectedCharacter2.episode.filter((ep) => !selectedCharacter1.episode.includes(ep))
+         : selectedCharacter2
+         ? selectedCharacter2.episode
+         : []
+   )
+
    const sharedEpisodes = useEpisodes(
       selectedCharacter1 && selectedCharacter2
-         ? selectedCharacter1.episode.filter((url) => selectedCharacter2.episode.includes(url))
+         ? selectedCharacter1.episode.filter((ep) => selectedCharacter2.episode.includes(ep))
          : []
    )
 
