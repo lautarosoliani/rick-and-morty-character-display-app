@@ -13,7 +13,6 @@ export type Character = {
    status: string
    species: string
    image: string
-   episode: string[]
 }
 
 function CharactersDashboard() {
@@ -45,32 +44,32 @@ function CharactersDashboard() {
    if (!data || !data.results) return <div>No data available</div>
 
    const handleCharacterChange = (characterId: string | null, characterNumber: number) => {
-      const character = data.results.find((char: Character) => char.id.toString() === characterId)
-      if (characterNumber === 1) {
-         setSelectedCharacter1(character || null)
+      if (characterId === null) {
+         characterNumber === 1 ? setSelectedCharacter1(null) : setSelectedCharacter2(null)
       } else {
-         setSelectedCharacter2(character || null)
+         const character = data.results.find((char: Character) => char.id.toString() === characterId)
+         characterNumber === 1 ? setSelectedCharacter1(character || null) : setSelectedCharacter2(character || null)
       }
    }
 
    return (
       <>
          <div className='flex flex-wrap justify-center mt-10'>
-            {data.results.map((character: JSX.IntrinsicAttributes & Character) => (
+            {data.results.map((character: Character) => (
                <CharacterCard key={character.id} {...character} />
             ))}
          </div>
          <Pagination page={page} data={data} setPage={setPage} />
          <div className='flex p-10 m-8 space-x-10'>
             <CharacterSelect
-               data={data.results}
+               data={data.results as Character[]}
                character={selectedCharacter1}
                onChange={(id) => handleCharacterChange(id, 1)}
                onRemove={() => setSelectedCharacter1(null)}
                characterNumber={1}
             />
             <CharacterSelect
-               data={data.results}
+               data={data.results as Character[]}
                character={selectedCharacter2}
                onChange={(id) => handleCharacterChange(id, 2)}
                onRemove={() => setSelectedCharacter2(null)}

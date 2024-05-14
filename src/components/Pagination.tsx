@@ -1,15 +1,9 @@
 import React, { useState } from 'react'
-
-type PaginationData = {
-   info: {
-      next: boolean
-      pages: number
-   }
-}
+import { CharactersResponse } from '../hooks/useCharacters'
 
 type PaginationProps = {
    page: number
-   data: PaginationData
+   data: CharactersResponse | null
    setPage: React.Dispatch<React.SetStateAction<number>>
 }
 

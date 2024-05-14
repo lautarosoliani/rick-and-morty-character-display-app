@@ -8,7 +8,7 @@ interface Character {
    image: string
 }
 
-interface CharactersResponse {
+export interface CharactersResponse {
    results: Character[]
    info: {
       count: number
