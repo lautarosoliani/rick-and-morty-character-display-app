@@ -1,6 +1,11 @@
-import { useQueries } from '@tanstack/react-query'
+import { useQueries, UseQueryResult } from '@tanstack/react-query'
 
-const fetchEpisode = async (url: string) => {
+interface Episode {
+   id: number
+   name: string
+}
+
+const fetchEpisode = async (url: string): Promise<Episode> => {
    const response = await fetch(url)
    if (!response.ok) {
       throw new Error('Network response was not ok')
@@ -8,7 +13,7 @@ const fetchEpisode = async (url: string) => {
    return response.json()
 }
 
-export function useEpisodes(episodeUrls: string[]) {
+export function useEpisodes(episodeUrls: string[]): UseQueryResult<Episode, Error>[] {
    return useQueries({
       queries: episodeUrls.map((url) => ({
          queryKey: ['episode', url],
