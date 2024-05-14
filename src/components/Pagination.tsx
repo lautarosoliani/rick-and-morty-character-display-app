@@ -16,7 +16,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, data, setPage }) => {
 
    const goToPage = () => {
       const pageNumber = parseInt(inputPage, 10)
-      if (pageNumber >= 1 && pageNumber <= data.info.pages && pageNumber !== page) {
+      if (data && pageNumber >= 1 && pageNumber <= data.info.pages && pageNumber !== page) {
          setPage(pageNumber)
          setInputPage('')
       }
@@ -37,11 +37,11 @@ const Pagination: React.FC<PaginationProps> = ({ page, data, setPage }) => {
          >
             Previous
          </button>
-         <div className='text-white font-bold py-2 px-4'>{`Page ${page} of ${data.info.pages}`}</div>
+         <div className='text-white font-bold py-2 px-4'>{`Page ${page} of ${data?.info.pages ?? 0}`}</div>
          <button
             className='bg-blue-950 text-white border-2 border-blue-900 hover:bg-blue-800 font-bold py-2 px-4 rounded-r'
-            onClick={() => setPage((old) => (data.info.next ? old + 1 : old))}
-            disabled={!data.info.next}
+            onClick={() => setPage((old) => (data?.info.next ? old + 1 : old))}
+            disabled={!data?.info.next}
          >
             Next
          </button>

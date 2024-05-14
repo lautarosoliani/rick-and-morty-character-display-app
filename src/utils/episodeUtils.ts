@@ -1,5 +1,4 @@
 import { Character } from '@/components/CharactersDashboard'
-
 /**
  * @param character
  * @param comparisonCharacter
@@ -7,7 +6,7 @@ import { Character } from '@/components/CharactersDashboard'
  */
 export function getUniqueEpisodes(character: Character | null, comparisonCharacter: Character | null): string[] {
    if (!character) return []
-   return character.episode.filter((ep) => !comparisonCharacter?.episode.includes(ep))
+   return character.episode.filter((ep: string) => !comparisonCharacter?.episode.includes(ep))
 }
 
 /**
@@ -18,5 +17,5 @@ export function getUniqueEpisodes(character: Character | null, comparisonCharact
 
 export function getSharedEpisodes(character1: Character | null, character2: Character | null): string[] {
    if (!character1 || !character2) return []
-   return character1.episode.filter((ep) => character2.episode.includes(ep))
+   return character1.episode.filter((ep: string) => character2.episode.includes(ep))
 }

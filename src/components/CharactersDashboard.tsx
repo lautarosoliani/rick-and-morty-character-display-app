@@ -6,7 +6,6 @@ import EpisodeList, { Episodes } from './EpisodeList'
 import Pagination from './Pagination'
 import CharacterCard, { CharacterCardSkeleton } from './CharacterCard'
 import { getUniqueEpisodes, getSharedEpisodes } from '@/utils/episodeUtils'
-
 export type Character = {
    id: number
    name: string
@@ -47,8 +46,14 @@ function CharactersDashboard() {
       if (characterId === null) {
          characterNumber === 1 ? setSelectedCharacter1(null) : setSelectedCharacter2(null)
       } else {
-         const character = data.results.find((char: Character) => char.id.toString() === characterId)
-         characterNumber === 1 ? setSelectedCharacter1(character || null) : setSelectedCharacter2(character || null)
+         const character = data.results.find((char: Character) => char.id.toString() === characterId) as
+            | Character
+            | undefined
+         if (characterNumber === 1) {
+            setSelectedCharacter1(character || null)
+         } else {
+            setSelectedCharacter2(character || null)
+         }
       }
    }
 
