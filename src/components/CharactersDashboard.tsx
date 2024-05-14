@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useCharacters } from '../../hooks/useCharacters'
-import { useEpisodes } from '../../hooks/useEpisodes'
+import { useCharacters } from '../hooks/useCharacters'
+import { useEpisodes } from '../hooks/useEpisodes'
 import CharacterSelect from './CharacterSelect'
 import EpisodeList, { Episodes } from './EpisodeList'
 import Pagination from './Pagination'
