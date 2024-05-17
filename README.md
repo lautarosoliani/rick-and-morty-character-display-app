@@ -26,7 +26,7 @@ This project is a web application that utilizes the Rick and Morty API to displa
 ![6](https://github.com/lautarosoliani/moviesReact/assets/72751465/40d458ba-0245-457d-9625-52e560c36f33)
 
 *Episode Details Sections showing exclusive episodes for Character #1, shared episodes between Character #1 and Character #2, and exclusive episodes for Character #2. Implemented React Select library for character selection via dropdown or search input.*
-![9](https://github.com/lautarosoliani/moviesReact/assets/72751465/b86e113c-68a8-40e6-be38-1610c4bd72b8)
+![3](https://github.com/lautarosoliani/rick-and-morty-character-display-app/assets/72751465/c3f6a5ce-587a-4782-8629-98877b125198)
 
 ## Testing
 Comprehensive testing has been conducted to ensure the reliability and functionality of the application. This includes:
