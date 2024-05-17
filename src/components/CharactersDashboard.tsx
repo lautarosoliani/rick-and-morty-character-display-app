@@ -5,7 +5,8 @@ import CharacterSelect from './CharacterSelect'
 import EpisodeList, { Episodes } from './EpisodeList'
 import Pagination from './Pagination'
 import CharacterCard, { CharacterCardSkeleton } from './CharacterCard'
-import { getUniqueEpisodes, getSharedEpisodes } from '@/utils/episodeUtils'
+import { getUniqueEpisodes, getSharedEpisodes } from '../utils/episodeUtils'
+
 export type Character = {
    id: number
    name: string
