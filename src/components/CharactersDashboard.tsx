@@ -13,6 +13,7 @@ export type Character = {
    status: string
    species: string
    image: string
+   episode?: string[]
 }
 
 function CharactersDashboard() {
