@@ -1,4 +1,4 @@
-# Ssr. Frontend Developer (NextJS | Reactjs) - Character Display App
+# Jr. Advanced Front End Developer (NextJS | Reactjs) - Character Display App
 ![7](https://github.com/lautarosoliani/moviesReact/assets/72751465/6af8fb01-9614-46d5-a626-acd6a07c8992)
 
 ## The web has been deployed in Netlify
